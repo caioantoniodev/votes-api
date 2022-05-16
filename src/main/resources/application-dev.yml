@@ -1,0 +1,16 @@
+votes-api:
+  configurations:
+    datasource:
+      host: localhost
+      port: 27017
+      database: votes-db
+      username: mongo
+      password: mongo
+      authentication-database: admin
+    kafka:
+      producer:
+        bootstrapServerHost: localhost:9092
+        topic: test
+    redis:
+      host: 127.0.0.1
+      port: 6379

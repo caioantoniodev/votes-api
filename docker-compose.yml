@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: votes_api_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    networks:
+      - mongo-dev-network
+    volumes:
+     - ./database/volumes/data:/data/db
+     - ./database/scripts/rs-init.sh:/scripts/rs-init.sh
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+
+  mongo-express:
+    image: mongo-express
+    container_name: votes_api_mongo_express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=mongo
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=mongo
+      - ME_CONFIG_BASICAUTH_USERNAME=express
+      - ME_CONFIG_BASICAUTH_PASSWORD=express
+    depends_on:
+      - mongo
+    networks:
+      - mongo-dev-network
+    volumes:
+      - ./database/volumes/data:/data/db
+
+  zookeeper:
+    container_name: votes_api_zookeeper
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    container_name: cooperative_votes_api_kafka
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+
+  redis:
+    container_name: votes_api_redis
+    image: library/redis:alpine
+    ports:
+      - "6379:6379"
+
+networks:
+  mongo-dev-network:
+    driver: bridge

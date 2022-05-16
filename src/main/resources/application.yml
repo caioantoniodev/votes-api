@@ -1,0 +1,47 @@
+votes-api:
+  configurations:
+    datasource:
+      host: ~
+      port: 0
+      database: ~
+      username: ~
+      password: ~
+      authentication-database: ~
+
+    kafka:
+      producer:
+        bootstrapServerHost: ~
+        topic: ~
+    redis:
+      host: ~
+      port: ~
+
+application:
+  version: @project.version@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    application-display-name: cooperative-votes-api
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  redis:
+    timeout: 0
+    lettuce:
+      pool:
+        max-active: 50
+        min-idle: 5
+        max-idle: 50
+        max-wait: 1
+  data:
+    redis:
+      repositories:
+        enabled: false
+    mongodb:
+      field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
+      uri: mongodb://mongo:mongo@localhost:27017/votes-db?replicaSet=dbrs&retryWrites=true
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false

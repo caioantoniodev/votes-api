@@ -1,0 +1,44 @@
+{
+  "properties": [
+    {
+      "name": "cooperative-votes-api.configurations",
+      "type": "java.lang.Object",
+      "description": "Custom configurations."
+    },
+    {
+      "name": "cooperative-votes-api.configurations.datasource",
+      "type": "java.lang.Object",
+      "description": "Mongo configuration."
+    },
+    {
+      "name": "cooperative-votes-api.configurations.datasource.uri",
+      "type": "java.lang.String",
+      "description": "Mongo URI configuration."
+    },
+    {
+      "name": "cooperative-votes-api.configurations.redis",
+      "type": "java.lang.Object",
+      "description": "Redis cache configuration."
+    },
+    {
+      "name": "cooperative-votes-api.configurations.kafka",
+      "type": "java.lang.Object",
+      "description": "Kafka message broker configuration."
+    },
+    {
+      "name": "application.version",
+      "type": "java.lang.String",
+      "description": "Application version."
+    },
+    {
+      "name": "cooperative-votes-api.configurations.datasource.host",
+      "type": "java.lang.String",
+      "description": "Description for cooperative-votes-api.configurations.datasource.host."
+    },
+    {
+      "name": "cooperative-votes-api.configurations.datasource.authentication-database",
+      "type": "java.lang.String",
+      "description": "Description for cooperative-votes-api.configurations.datasource.authentication-database."
+    }
+  ]
+}
