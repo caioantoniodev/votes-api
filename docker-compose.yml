@@ -3,13 +3,14 @@ version: '3'
 services:
 
   mongo:
-    image: mongo
+    image: mongo:4.4
     container_name: votes_api_mongo
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongo
-      - MONGO_INITDB_ROOT_PASSWORD=mongo
+      - MONGO_INITDB_ROOT_USERNAME=neo
+      - MONGO_INITDB_ROOT_PASSWORD=matrix
+      - MONGO_INITDB_DATABASE=votes-db
     networks:
       - mongo-dev-network
     volumes:
@@ -25,8 +26,8 @@ services:
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo
       - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_MONGODB_AUTH_USERNAME=mongo
-      - ME_CONFIG_MONGODB_AUTH_PASSWORD=mongo
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=neo
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=matrix
       - ME_CONFIG_BASICAUTH_USERNAME=express
       - ME_CONFIG_BASICAUTH_PASSWORD=express
     depends_on:
