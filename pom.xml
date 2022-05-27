@@ -8,10 +8,10 @@
         <version>2.6.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>edu.mentorship.cooperativevotes</groupId>
-    <artifactId>cooperative-votes-api</artifactId>
-    <version>0.0.1</version>
-    <name>cooperative-votes-api</name>
+    <groupId>edu.mentorship.votes</groupId>
+    <artifactId>votes-api</artifactId>
+    <version>1.0.0</version>
+    <name>votes-api</name>
     <description>Mentorship project for Spring Boot</description>
     <properties>
         <app.code>cooperative-votes-api</app.code>
@@ -93,10 +93,10 @@
                             </dataFile>                            <!-- Sets the output directory for the code coverage report. -->
                             <outputDirectory>target/jacoco-ut</outputDirectory>
                             <excludes>
-                                <exclude>edu/mentorship/cooperativevotes/structure/config/**/*.class</exclude>
-                                <exclude>edu/mentorship/cooperativevotes/application/api/**/*.class</exclude>
-                                <exclude>edu/mentorship/cooperativevotes/application/dto/**/*.class</exclude>
-                                <exclude>edu/mentorship/cooperativevotes/CooperativeVotesApplication.class</exclude>
+                                <exclude>edu/mentorship/votes/structure/config/**/*.class</exclude>
+                                <exclude>edu/mentorship/votes/application/api/**/*.class</exclude>
+                                <exclude>edu/mentorship/votes/application/dto/**/*.class</exclude>
+                                <exclude>edu/mentorship/votes/VotesApplication.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
