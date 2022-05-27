@@ -14,7 +14,6 @@
     <name>votes-api</name>
     <description>Mentorship project for Spring Boot</description>
     <properties>
-        <app.code>cooperative-votes-api</app.code>
         <java.version>11</java.version>
 
         <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
