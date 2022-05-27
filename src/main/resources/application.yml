@@ -21,8 +21,8 @@ application:
 server:
   port: 8080
   servlet:
-    context-path: /api
-    application-display-name: cooperative-votes-api
+    context-path: /api/v1
+    application-display-name: votes-api
 spring:
   mvc:
     throw-exception-if-no-handler-found: true
@@ -40,7 +40,7 @@ spring:
         enabled: false
     mongodb:
       field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
-      uri: mongodb:neo:matrix//localhost:27017/votes-db?replicaSet=dbrs&retryWrites=true
+      uri: mongodb://mongo:mongo@localhost:27017/votes-db?replicaSet=dbrs&retryWrites=true
       database: votes-db
   jackson:
     default-property-inclusion: non_null

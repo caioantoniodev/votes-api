@@ -7,35 +7,10 @@ services:
     container_name: votes_api_mongo
     ports:
       - "27017:27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=neo
-      - MONGO_INITDB_ROOT_PASSWORD=matrix
-      - MONGO_INITDB_DATABASE=votes-db
-    networks:
-      - mongo-dev-network
     volumes:
      - ./database/volumes/data:/data/db
      - ./database/scripts/rs-init.sh:/scripts/rs-init.sh
     entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
-
-  mongo-express:
-    image: mongo-express
-    container_name: votes_api_mongo_express
-    ports:
-      - "8081:8081"
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongo
-      - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_MONGODB_AUTH_USERNAME=neo
-      - ME_CONFIG_MONGODB_AUTH_PASSWORD=matrix
-      - ME_CONFIG_BASICAUTH_USERNAME=express
-      - ME_CONFIG_BASICAUTH_PASSWORD=express
-    depends_on:
-      - mongo
-    networks:
-      - mongo-dev-network
-    volumes:
-      - ./database/volumes/data:/data/db
 
   zookeeper:
     container_name: votes_api_zookeeper
@@ -60,7 +35,3 @@ services:
     image: library/redis:alpine
     ports:
       - "6379:6379"
-
-networks:
-  mongo-dev-network:
-    driver: bridge
