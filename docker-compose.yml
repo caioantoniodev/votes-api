@@ -19,7 +19,7 @@ services:
       - "2181:2181"
 
   kafka:
-    container_name: cooperative_votes_api_kafka
+    container_name: votes_api_kafka
     image: wurstmeister/kafka
     ports:
       - "9092:9092"
