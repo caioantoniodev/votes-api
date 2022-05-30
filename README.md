@@ -1,4 +1,4 @@
-## COOPERATIVE-VOTES
+## VOTES-API
 
 Aplicação para prova de conceito, um exemplo de solução para uma aplicação de votação com alta
 demanda.
