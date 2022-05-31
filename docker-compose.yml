@@ -1,16 +1,15 @@
-version: '3'
+version: "3"
 
 services:
-
   mongo:
-    image: mongo:4.4
+    image: mongo
     container_name: votes_api_mongo
     ports:
       - "27017:27017"
-    volumes:
-     - ./database/volumes/data:/data/db
-     - ./database/scripts/rs-init.sh:/scripts/rs-init.sh
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs" ]
+    environment:
+      - MONGO_INITDB_DATABASE=votes-db
+      - MONGO_INITDB_ROOT_USERNAME=votes
+      - MONGO_INITDB_ROOT_PASSWORD=votes
 
   zookeeper:
     container_name: votes_api_zookeeper
@@ -28,7 +27,7 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'false'
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
 
   redis:
     container_name: votes_api_redis

@@ -34,7 +34,7 @@ public class UpdateStave {
 
         entity.setTheme(inputUpdateStaveDto.getTheme());
         entity.setDescription(inputUpdateStaveDto.getDescription());
-        entity.updateAt();
+//        entity.updateAt();
 
         var staveUpdated = staveRepository.save(entity);
 

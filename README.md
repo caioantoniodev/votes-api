@@ -59,5 +59,5 @@ Toda resposta da API contém um Header com chave `Version-Api`  e o valor a vers
 * [OpenApi](https://www.openapis.org/)
 
 mongo <<EOF
-db.createUser({ user: "mongo", pwd: "mongo", roles: [ { role: "root", db: "admin" } ] })
+db.createUser({ user: "votes", pwd: "votes", roles: [ { role: "root", db: "admin" } ] })
 EOF
