@@ -32,13 +32,4 @@ public class Stave {
     private int totalVotesNo;
 
     private int totalVoteInvalid;
-
-    public void createAt() {
-        createAt = LocalDateTime.now();
-        updateAt();
-    }
-
-    public void updateAt() {
-        updateAt = LocalDateTime.now();
-    }
 }

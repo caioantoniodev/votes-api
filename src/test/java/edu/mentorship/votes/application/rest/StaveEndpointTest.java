@@ -2,9 +2,9 @@ package edu.mentorship.votes.application.rest;
 
 import edu.mentorship.votes.AbstractContextTest;
 import edu.mentorship.votes.application.dto.InputNewStaveDto;
-import edu.mentorship.votes.structure.repository.StaveRepository;
 import edu.mentorship.votes.core.stave.domain.Stave;
 import edu.mentorship.votes.structure.mapper.MessageMapper;
+import edu.mentorship.votes.structure.repository.StaveRepository;
 import io.restassured.RestAssured;
 import io.restassured.mapper.ObjectMapperType;
 import lombok.RequiredArgsConstructor;
@@ -118,7 +118,6 @@ class StaveEndpointTest extends AbstractContextTest {
         entity.setTheme("Rest APIs");
         entity.setId(UUID.randomUUID().toString());
         entity.setDescription("Good Practices; Modern architecture");
-        entity.createAt();
 
         staveRepository.save(entity);
 

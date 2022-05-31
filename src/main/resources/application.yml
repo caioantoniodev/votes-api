@@ -40,7 +40,8 @@ spring:
         enabled: false
     mongodb:
       field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
-      uri: mongodb://mongo:mongo@localhost:27017/votes-db?replicaSet=dbrs&retryWrites=true&authSource=admin
+      uri: mongodb://votes:votes@localhost:27017/votes-db?authSource=admin
+      database: votes-db
   jackson:
     default-property-inclusion: non_null
     serialization:

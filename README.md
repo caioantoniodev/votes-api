@@ -57,7 +57,3 @@ Toda resposta da API contém um Header com chave `Version-Api`  e o valor a vers
 * [Spring Cloud](https://spring.io/projects/spring-cloud)
 * [Wiremock](http://wiremock.org/)
 * [OpenApi](https://www.openapis.org/)
-
-mongo <<EOF
-db.createUser({ user: "mongo", pwd: "mongo", roles: [ { role: "root", db: "admin" } ] })
-EOF
