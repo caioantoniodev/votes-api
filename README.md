@@ -1,4 +1,4 @@
-## COOPERATIVE-VOTES
+## VOTES-API
 
 Aplicação para prova de conceito, um exemplo de solução para uma aplicação de votação com alta
 demanda.
@@ -57,7 +57,3 @@ Toda resposta da API contém um Header com chave `Version-Api`  e o valor a vers
 * [Spring Cloud](https://spring.io/projects/spring-cloud)
 * [Wiremock](http://wiremock.org/)
 * [OpenApi](https://www.openapis.org/)
-
-mongo <<EOF
-db.createUser({ user: "votes", pwd: "votes", roles: [ { role: "root", db: "admin" } ] })
-EOF
