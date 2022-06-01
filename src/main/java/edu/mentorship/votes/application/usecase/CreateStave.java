@@ -2,6 +2,7 @@ package edu.mentorship.votes.application.usecase;
 
 import edu.mentorship.votes.application.dto.InputNewStaveDto;
 import edu.mentorship.votes.application.dto.StaveDto;
+import edu.mentorship.votes.core.stave.domain.State;
 import edu.mentorship.votes.core.stave.domain.Stave;
 import edu.mentorship.votes.structure.repository.StaveRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,8 @@ public class CreateStave {
 
     public StaveDto create(InputNewStaveDto inputNewStaveDto) {
 
-        var staveExists = staveRepository.existsStaveByThemeAndStateNot(inputNewStaveDto.getTheme(), "SESSION_VOTES_DONE");
+        var staveExists = staveRepository.existsStaveByThemeAndStateNot(
+                inputNewStaveDto.getTheme(), State.SESSION_VOTES_DONE.name());
 
         if (staveExists) {
             throw new RuntimeException("");

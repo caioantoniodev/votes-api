@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @Component
 @RequiredArgsConstructor
 public class UpdateStave {
@@ -34,7 +37,7 @@ public class UpdateStave {
 
         entity.setTheme(inputUpdateStaveDto.getTheme());
         entity.setDescription(inputUpdateStaveDto.getDescription());
-//        entity.updateAt();
+        entity.setUpdateAt(LocalDateTime.now(ZoneId.of("UTC")));
 
         var staveUpdated = staveRepository.save(entity);
 

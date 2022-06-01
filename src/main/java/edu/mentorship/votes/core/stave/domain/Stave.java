@@ -5,10 +5,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Data
 @Document(collection = "stave")
 public class Stave {
+
+    public Stave() {
+        createAt = LocalDateTime.now(ZoneId.of("UTC"));
+        updateAt = LocalDateTime.now(ZoneId.of("UTC"));
+    }
 
     @Id
     private String id;
