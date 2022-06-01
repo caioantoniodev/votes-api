@@ -354,6 +354,7 @@ components:
       properties:
         theme:
           type: string
+          x-constraints: "@NotBlank"
           minLength: 5
           maxLength: 100
           description: Texto simples para que defini o tema da pauta

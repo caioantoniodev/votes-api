@@ -10,6 +10,9 @@ import io.restassured.mapper.ObjectMapperType;
 import lombok.RequiredArgsConstructor;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,9 +27,18 @@ class StaveEndpointTest extends AbstractContextTest {
     @Autowired
     private StaveRepository staveRepository;
 
-    @Test
-    void shouldReturnBadRequestWhenThemeInvalid() {
-        var staveDto = new InputNewStaveDto().description("battle");
+    @ParameterizedTest(name = "{index} - [{arguments}]")
+    @ValueSource(strings = {
+            "",
+            "      ",
+            "plea",
+            "excellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellencee"
+    })
+    @NullSource
+    void shouldReturnBadRequestWhenThemeInvalid(String value) {
+        var staveDto = new InputNewStaveDto()
+                .description("battle")
+                .theme(value);
 
         RestAssured
                 .given()
@@ -39,7 +51,7 @@ class StaveEndpointTest extends AbstractContextTest {
                 .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
                 .body("details.findAll {it}.field", Matchers.hasItems("theme"))
                 .when()
-                    .post("/api/staves")
+                    .post("/api/v1/staves")
                 .prettyPrint();
     }
 
@@ -58,7 +70,7 @@ class StaveEndpointTest extends AbstractContextTest {
                 .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
                 .body("details.findAll {it}.field", Matchers.hasItems("description"))
                 .when()
-                .post("/api/staves")
+                .post("/api/v1/staves")
                 .prettyPrint();
     }
 
@@ -85,7 +97,7 @@ class StaveEndpointTest extends AbstractContextTest {
                 .body("details.findAll {it}.descriptionError", Matchers.hasItems("size must be between 5 and 100"))
                 .body("message", Matchers.is(message))
                 .when()
-                .post("/api/staves")
+                .post("/api/v1/staves")
                 .prettyPrint();
     }
 
@@ -106,7 +118,7 @@ class StaveEndpointTest extends AbstractContextTest {
                 .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
                 .body("details.findAll {it}.descriptionError", Matchers.hasItems("tamanho deve ser entre 5 e 255"))
                 .when()
-                .post("/api/staves")
+                .post("/api/v1/staves")
                 .prettyPrint();
     }
 
@@ -141,7 +153,7 @@ class StaveEndpointTest extends AbstractContextTest {
                 .body("statusCode", Matchers.is(HttpStatus.CONFLICT.value()))
                 .body("message", Matchers.is(message))
                 .when()
-                .post("/api/staves")
+                .post("/api/v1/staves")
                 .prettyPrint();
     }
 }
