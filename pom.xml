@@ -42,7 +42,6 @@
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     </properties>
     <build>
-        <finalName>${app.code}</finalName>
         <plugins>            <!--      configure spring-boot-maven-plugin      -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
