@@ -40,6 +40,8 @@
         <jacoco.skip>${skipTests}</jacoco.skip>
         <de.flapdoodle.embed.mongo.version>3.4.5</de.flapdoodle.embed.mongo.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <jackson-databind-nullable.version>0.2.2</jackson-databind-nullable.version>
+        <springfox-bean-validators.version>2.10.5</springfox-bean-validators.version>
     </properties>
     <build>
         <plugins>            <!--      configure spring-boot-maven-plugin      -->
@@ -145,6 +147,7 @@
                             <generateApiTests>false</generateApiTests>
                             <generateApis>true</generateApis>
                             <generateApiDocumentation>true</generateApiDocumentation>
+                            <templateDirectory>${project.basedir}/src/main/resources/openapi/template</templateDirectory>
                             <typeMappings>
                                 <typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping>
                             </typeMappings>
@@ -219,15 +222,23 @@
             <version>${springdoc-openapi-webmvc-core.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <version>${cxf.version}</version>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-databind-nullable.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>${springfox-bean-validators.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
             <version>${jaxb-impl.version}</version>
         </dependency>
+
+        <!-- Test Dependencies  -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -241,7 +252,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Test Dependencies  -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
