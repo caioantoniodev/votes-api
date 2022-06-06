@@ -29,56 +29,13 @@ class StaveEndpointTest extends AbstractContextTest {
 
     @ParameterizedTest(name = "{index} - [{arguments}]")
     @ValueSource(strings = {
-            "",
-            "      ",
             "plea",
             "excellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellencee"
     })
-    @NullSource
-    void shouldReturnBadRequestWhenThemeInvalid(String value) {
+    void shouldReturnBadRequestWhenThemeLengthInvalid(String value) {
         var staveDto = new InputNewStaveDto()
                 .description("battle")
                 .theme(value);
-
-        RestAssured
-                .given()
-                .port(port)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .body(staveDto, ObjectMapperType.JACKSON_2)
-                .expect()
-                    .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
-                .body("details.findAll {it}.field", Matchers.hasItems("theme"))
-                .when()
-                    .post("/api/v1/staves")
-                .prettyPrint();
-    }
-
-    @Test
-    void shouldReturnBadRequestWhenDescriptionInvalid() {
-        var staveDto = new InputNewStaveDto().theme("battle");
-
-        RestAssured
-                .given()
-                .port(port)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .body(staveDto, ObjectMapperType.JACKSON_2)
-                .expect()
-                .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
-                .body("details.findAll {it}.field", Matchers.hasItems("description"))
-                .when()
-                .post("/api/v1/staves")
-                .prettyPrint();
-    }
-
-    @Test
-    void shouldReturnBadRequestWhenThemeLeesThanFive() {
-        var staveDto = new InputNewStaveDto()
-                .theme("also")
-                .description("creature");
 
         var locale = Locale.US;
 
@@ -87,70 +44,105 @@ class StaveEndpointTest extends AbstractContextTest {
         RestAssured
                 .given()
                 .port(port)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .header(HttpHeaders.ACCEPT_LANGUAGE, locale)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body(staveDto, ObjectMapperType.JACKSON_2)
+                .expect()
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
+                .body("details.findAll {it}.descriptionError", Matchers.hasItems("size must be between 5 and 100"))
+                .body("message", Matchers.is(message))
+                .when()
+                    .post("/api/v1/staves")
+                .prettyPrint();
+    }
+
+    @ParameterizedTest(name = "{index} - [{arguments}]")
+    @ValueSource(strings = {
+            "        ",
+            ""
+    })
+    @NullSource
+    void shouldReturnBadRequestWhenThemeIsEmpty(String value) {
+        var staveDto = new InputNewStaveDto()
+                .description("battle")
+                .theme(value);
+
+        var locale = Locale.US;
+
+        var message = messageSource.getMessage(MessageMapper.ARGUMENT_INVALID.getCode(), null, locale);
+
+        RestAssured
+                .given()
+                .port(port)
+                .header(HttpHeaders.ACCEPT_LANGUAGE, locale)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .body(staveDto, ObjectMapperType.JACKSON_2)
                 .expect()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
-                .body("details.findAll {it}.descriptionError", Matchers.hasItems("size must be between 5 and 100"))
+                .body("details.findAll {it}.descriptionError", Matchers.hasItems("must not be blank"))
                 .body("message", Matchers.is(message))
                 .when()
                 .post("/api/v1/staves")
                 .prettyPrint();
     }
 
-    @Test
-    void shouldReturnBadRequestWhenDescriptionLeesThanFive() {
+    @ParameterizedTest(name = "{index} - [{arguments}]")
+    @ValueSource(strings = {
+            "plea",
+            "excellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcellenceexcell"
+    })
+    void shouldReturnBadRequestWhenDescriptionLengthInvalid(String value) {
         var staveDto = new InputNewStaveDto()
-                .theme("noise")
-                .description("dust");
+                .description(value)
+                .theme("battle");
+
+        var locale = Locale.US;
+
+        var message = messageSource.getMessage(MessageMapper.ARGUMENT_INVALID.getCode(), null, locale);
 
         RestAssured
                 .given()
                 .port(port)
+                .header(HttpHeaders.ACCEPT_LANGUAGE, locale)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .body(staveDto, ObjectMapperType.JACKSON_2)
                 .expect()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
-                .body("details.findAll {it}.descriptionError", Matchers.hasItems("tamanho deve ser entre 5 e 255"))
+                .body("details.findAll {it}.descriptionError", Matchers.hasItems("size must be between 5 and 255"))
+                .body("message", Matchers.is(message))
                 .when()
                 .post("/api/v1/staves")
                 .prettyPrint();
     }
 
-    @Test
-    void shouldReturnConflictWhenTwoStavesIsEqual() {
-
-        var entity = new Stave();
-
-        entity.setTheme("Rest APIs");
-        entity.setId(UUID.randomUUID().toString());
-        entity.setDescription("Good Practices; Modern architecture");
-
-        staveRepository.save(entity);
-
+    @ParameterizedTest(name = "{index} - [{arguments}]")
+    @NullSource
+    void shouldReturnBadRequestWhenDescriptionIsEmpty(String value) {
         var staveDto = new InputNewStaveDto()
-                .theme(entity.getTheme())
-                .description(entity.getDescription());
+                .description(value)
+                .theme("battle");
 
         var locale = Locale.US;
 
-        var message = messageSource.getMessage(MessageMapper.THEME_CONFLICT.getCode(), null, locale);
+        var message = messageSource.getMessage(MessageMapper.ARGUMENT_INVALID.getCode(), null, locale);
 
         RestAssured
                 .given()
                 .port(port)
+                .header(HttpHeaders.ACCEPT_LANGUAGE, locale)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
-                .header(HttpHeaders.ACCEPT_LANGUAGE, locale)
                 .body(staveDto, ObjectMapperType.JACKSON_2)
                 .expect()
-                .statusCode(HttpStatus.CREATED.value())
-                .body("statusCode", Matchers.is(HttpStatus.CONFLICT.value()))
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("statusCode", Matchers.is(HttpStatus.BAD_REQUEST.value()))
+                .body("details.findAll {it}.descriptionError", Matchers.hasItems("must not be null"))
                 .body("message", Matchers.is(message))
                 .when()
                 .post("/api/v1/staves")
