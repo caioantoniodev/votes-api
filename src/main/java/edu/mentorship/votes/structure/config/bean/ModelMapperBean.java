@@ -1,7 +1,6 @@
 package edu.mentorship.votes.structure.config.bean;
 
 import edu.mentorship.votes.application.dto.InputNewStaveDto;
-import edu.mentorship.votes.core.stave.domain.State;
 import edu.mentorship.votes.core.stave.domain.Stave;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;

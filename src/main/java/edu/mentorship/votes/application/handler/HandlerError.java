@@ -4,6 +4,7 @@ import edu.mentorship.votes.application.dto.ErrorBaseDto;
 import edu.mentorship.votes.application.dto.ErrorDetailsDto;
 import edu.mentorship.votes.application.dto.ErrorDto;
 import edu.mentorship.votes.application.rest.EndpointsTranslator;
+import edu.mentorship.votes.structure.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
@@ -57,6 +58,21 @@ public class HandlerError implements EndpointsTranslator {
                 }).collect(Collectors.toList());
 
         return buildErrorBaseDtoWithDetails(http, errorDetailsDtos);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public  ResponseEntity<ErrorBaseDto> businessException(BusinessException ex, HttpServletRequest http) {
+        var servletPath = http.getServletPath();
+        var status = ex.getStatus();
+        var details = ex.getDetails();
+        var code = ex.getCode();
+        var header = http.getHeader(ACCEPT_LANGUAGE);
+
+        var message = getMessage(code, getLocale(header), details);
+
+        var errorBaseDto = new ErrorDto().message(message).path(servletPath).statusCode(status.value());
+
+        return ResponseEntity.status(status).body(errorBaseDto);
     }
 
     private ResponseEntity<ErrorBaseDto> buildErrorBaseDtoWithDetails(HttpServletRequest request,
