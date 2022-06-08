@@ -4,8 +4,8 @@ votes-api:
       host: localhost
       port: 27017
       database: votes-db
-      username: mongo
-      password: mongo
+      username: votes
+      password: votes
       authentication-database: admin
     kafka:
       producer:
