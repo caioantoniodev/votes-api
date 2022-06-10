@@ -8,8 +8,8 @@ import java.util.Locale;
 public interface EndpointsTranslator {
     MessageSource getMessageSource();
 
-    default String getMessage(String codeMessage, Locale locale, String ...args) {
-        return getMessageSource().getMessage(codeMessage, args, locale);
+    default String getMessage(String messagesMapper, Locale locale, String... args) {
+        return getMessageSource().getMessage(messagesMapper, args, locale);
     }
 
     default Locale getLocale(String language) {
@@ -19,7 +19,6 @@ public interface EndpointsTranslator {
 
         if (language.contains(",")) {
             var languages = language.split(",");
-
             return Locale.forLanguageTag(languages[0]);
         }
 
