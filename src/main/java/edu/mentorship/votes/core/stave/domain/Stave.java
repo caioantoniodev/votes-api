@@ -1,5 +1,6 @@
 package edu.mentorship.votes.core.stave.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Data
+@Builder
 @Document(collection = "stave")
 public class Stave {
 

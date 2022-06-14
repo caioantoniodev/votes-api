@@ -11,10 +11,7 @@ import io.restassured.mapper.ObjectMapperType;
 import lombok.RequiredArgsConstructor;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -61,11 +58,9 @@ class StaveEndpointTest extends AbstractContextTest {
     }
 
     @ParameterizedTest(name = "{index} - [{arguments}]")
-    @ValueSource(strings = {
-            "        ",
-            ""
-    })
+    @ValueSource(strings = "        ")
     @NullSource
+    @EmptySource
     void shouldReturnBadRequestWhenThemeIsEmpty(String value) {
         var staveDto = new InputNewStaveDto()
                 .description("battle")
@@ -153,13 +148,13 @@ class StaveEndpointTest extends AbstractContextTest {
 
     @ParameterizedTest(name = "{index} - [{arguments}]")
     @MethodSource("returnArgumentsConflictThemeVotes")
-    void shouldReturnConflict(Stave stave) {
+    void shouldReturnConflictWhenThemeAndDescriptionIsEqual(Stave stave) {
 
         staveRepository.save(stave);
 
         var staveDto = new InputNewStaveDto()
                 .description("description")
-                .theme("theme1");
+                .theme("theme");
 
         var locale = Locale.US;
 
@@ -182,35 +177,35 @@ class StaveEndpointTest extends AbstractContextTest {
     }
 
     private static Stream<Arguments> returnArgumentsConflictThemeVotes() {
-        var stave = new Stave();
+        var staveStateCreate = new Stave();
 
-        stave.setState(StateStave.CREATE.name());
-        stave.setDescription("description");
-        stave.setTheme("theme1");
+        staveStateCreate.setState(StateStave.CREATE.name());
+        staveStateCreate.setDescription("description");
+        staveStateCreate.setTheme("theme");
 
-        var stave2 = new Stave();
+        var staveStateVotingInProgress = new Stave();
 
-        stave2.setState(StateStave.VOTING_IN_PROGRESS.name());
-        stave2.setDescription("description");
-        stave2.setTheme("theme1");
+        staveStateVotingInProgress.setState(StateStave.VOTING_IN_PROGRESS.name());
+        staveStateVotingInProgress.setDescription("description");
+        staveStateVotingInProgress.setTheme("theme");
 
-        var stave3 = new Stave();
+        var staveStateCancel = new Stave();
 
-        stave3.setState(StateStave.CANCEL.name());
-        stave3.setDescription("description");
-        stave3.setTheme("theme1");
+        staveStateCancel.setState(StateStave.CANCEL.name());
+        staveStateCancel.setDescription("description");
+        staveStateCancel.setTheme("theme");
 
-        var stave4 = new Stave();
+        var staveStateCalculatingVotes = new Stave();
 
-        stave4.setState(StateStave.CALCULATING_VOTES.name());
-        stave4.setDescription("description");
-        stave4.setTheme("theme1");
+        staveStateCalculatingVotes.setState(StateStave.CALCULATING_VOTES.name());
+        staveStateCalculatingVotes.setDescription("description");
+        staveStateCalculatingVotes.setTheme("theme");
 
         return Stream.of(
-                Arguments.of(stave),
-                Arguments.of(stave2),
-                Arguments.of(stave3),
-                Arguments.of(stave4)
+                Arguments.of(staveStateCreate),
+                Arguments.of(staveStateVotingInProgress),
+                Arguments.of(staveStateCancel),
+                Arguments.of(staveStateCalculatingVotes)
         );
     }
 }
