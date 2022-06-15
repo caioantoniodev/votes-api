@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Data
-@Builder
 @Document(collection = "stave")
 public class Stave {
 
