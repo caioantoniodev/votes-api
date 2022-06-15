@@ -147,14 +147,20 @@ class StaveEndpointTest extends AbstractContextTest {
     }
 
     @ParameterizedTest(name = "{index} - [{arguments}]")
-    @MethodSource("returnArgumentsConflictThemeVotes")
-    void shouldReturnConflictWhenThemeAndDescriptionIsEqual(Stave stave) {
+    @EnumSource(value = StateStave.class, mode = EnumSource.Mode.EXCLUDE, names = "SESSION_VOTES_DONE")
+    void shouldReturnConflictWhenThemeAndDescriptionIsEqual(StateStave stateStave) {
+
+        var stave = new Stave();
+
+        stave.setState(stateStave.name());
+        stave.setDescription("description");
+        stave.setTheme("theme");
 
         staveRepository.save(stave);
 
         var staveDto = new InputNewStaveDto()
-                .description("description")
-                .theme("theme");
+                .description(stave.getDescription())
+                .theme(stave.getTheme());
 
         var locale = Locale.US;
 
@@ -174,38 +180,5 @@ class StaveEndpointTest extends AbstractContextTest {
                 .when()
                 .post("/api/v1/staves")
                 .prettyPrint();
-    }
-
-    private static Stream<Arguments> returnArgumentsConflictThemeVotes() {
-        var staveStateCreate = new Stave();
-
-        staveStateCreate.setState(StateStave.CREATE.name());
-        staveStateCreate.setDescription("description");
-        staveStateCreate.setTheme("theme");
-
-        var staveStateVotingInProgress = new Stave();
-
-        staveStateVotingInProgress.setState(StateStave.VOTING_IN_PROGRESS.name());
-        staveStateVotingInProgress.setDescription("description");
-        staveStateVotingInProgress.setTheme("theme");
-
-        var staveStateCancel = new Stave();
-
-        staveStateCancel.setState(StateStave.CANCEL.name());
-        staveStateCancel.setDescription("description");
-        staveStateCancel.setTheme("theme");
-
-        var staveStateCalculatingVotes = new Stave();
-
-        staveStateCalculatingVotes.setState(StateStave.CALCULATING_VOTES.name());
-        staveStateCalculatingVotes.setDescription("description");
-        staveStateCalculatingVotes.setTheme("theme");
-
-        return Stream.of(
-                Arguments.of(staveStateCreate),
-                Arguments.of(staveStateVotingInProgress),
-                Arguments.of(staveStateCancel),
-                Arguments.of(staveStateCalculatingVotes)
-        );
     }
 }
