@@ -40,8 +40,12 @@ spring:
         enabled: false
     mongodb:
       field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy
-      uri: mongodb://votes:votes@localhost:27017/votes-db?authSource=admin
-      database: votes-db
+      host: ${votes-api.configurations.datasource.host}
+      port: ${votes-api.configurations.datasource.port}
+      database: ${votes-api.configurations.datasource.database}
+      username: ${votes-api.configurations.datasource.username}
+      password: ${votes-api.configurations.datasource.password}
+      authentication-database: ${votes-api.configurations.datasource.authentication-database}
   jackson:
     default-property-inclusion: non_null
     serialization:
