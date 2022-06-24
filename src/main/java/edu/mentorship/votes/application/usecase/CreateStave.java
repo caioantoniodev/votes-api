@@ -3,6 +3,7 @@ package edu.mentorship.votes.application.usecase;
 import edu.mentorship.votes.application.dto.InputNewStaveDto;
 import edu.mentorship.votes.application.dto.StaveDto;
 import edu.mentorship.votes.core.shared.command.ServiceCommand;
+import edu.mentorship.votes.core.stave.StaveRepresentation;
 import edu.mentorship.votes.core.stave.domain.StateStave;
 import edu.mentorship.votes.core.stave.domain.Stave;
 import edu.mentorship.votes.core.stave.service.CreatedServiceCommand;
@@ -24,10 +25,10 @@ public class CreateStave {
 
     private final StaveRepository staveRepository;
 
-    private final ServiceCommand<Stave, Stave> serviceCommand;
+    private final ServiceCommand<Stave, StaveRepresentation> serviceCommand;
 
     public CreateStave(ModelMapper modelMapper, StaveRepository staveRepository,
-                       @Qualifier(CREATED_COMMAND) ServiceCommand<Stave, Stave> serviceCommand) {
+                       @Qualifier(CREATED_COMMAND) ServiceCommand<Stave, StaveRepresentation> serviceCommand) {
         this.modelMapper = modelMapper;
         this.staveRepository = staveRepository;
         this.serviceCommand = serviceCommand;
@@ -38,7 +39,7 @@ public class CreateStave {
         var staveExists = staveRepository.existsStaveByThemeAndStateNot(
                 inputNewStaveDto.getTheme(), StateStave.SESSION_VOTES_DONE.name());
 
-        if (staveExists) {
+        if (Boolean.TRUE.equals(staveExists)) {
             throw new BusinessException(HttpStatus.CONFLICT, MessageMapper.THEME_CONFLICT.getCode());
         }
 

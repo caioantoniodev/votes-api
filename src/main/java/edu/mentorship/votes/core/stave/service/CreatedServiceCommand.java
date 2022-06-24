@@ -1,19 +1,31 @@
 package edu.mentorship.votes.core.stave.service;
 
 import edu.mentorship.votes.core.shared.command.ServiceCommand;
+import edu.mentorship.votes.core.shared.event.StaveRegistered;
+import edu.mentorship.votes.core.stave.StaveRepresentation;
 import edu.mentorship.votes.core.stave.domain.Stave;
+import edu.mentorship.votes.core.stave.domain.StaveEventRepresentationAdapter;
 import edu.mentorship.votes.structure.repository.StaveRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 
 @RequiredArgsConstructor
-public class CreatedServiceCommand implements ServiceCommand<Stave, Stave> {
+public class CreatedServiceCommand implements ServiceCommand<Stave, StaveRepresentation> {
 
-    private final StaveRepository staveRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     @Override
-    public Stave execute(Stave input) {
-        return null;
+    public StaveRepresentation execute(Stave input) {
+        StaveRepresentation representationAdapter = StaveEventRepresentationAdapter.of(input.getIdentify().getValue(),
+                input.getTheme(), input.getDescription());
+
+        StaveRegistered staveRegistered = new StaveRegistered(representationAdapter);
+
+        applicationEventPublisher.publishEvent(staveRegistered);
+
+        return representationAdapter;
     }
+
 
     // To Do
     /* Create session */
