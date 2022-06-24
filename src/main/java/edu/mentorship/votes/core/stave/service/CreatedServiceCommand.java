@@ -25,7 +25,6 @@ public class CreatedServiceCommand implements ServiceCommand<Stave, StaveReprese
         return representationAdapter;
     }
 
-
     // To Do
     /* Create session */
 }

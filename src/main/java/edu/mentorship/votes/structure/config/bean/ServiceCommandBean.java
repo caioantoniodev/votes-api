@@ -5,6 +5,7 @@ import edu.mentorship.votes.core.stave.StaveRepresentation;
 import edu.mentorship.votes.core.stave.domain.Stave;
 import edu.mentorship.votes.core.stave.service.CreatedServiceCommand;
 import edu.mentorship.votes.core.stave.service.DeletedServiceCommand;
+import edu.mentorship.votes.structure.repository.StaveRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
