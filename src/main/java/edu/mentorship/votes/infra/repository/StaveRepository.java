@@ -1,4 +1,4 @@
-package edu.mentorship.votes.structure.repository;
+package edu.mentorship.votes.infra.repository;
 
 import edu.mentorship.votes.core.stave.domain.Stave;
 import org.springframework.data.mongodb.repository.MongoRepository;

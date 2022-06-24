@@ -1,4 +1,4 @@
-package edu.mentorship.votes.structure.service;
+package edu.mentorship.votes.infra.service;
 
 import edu.mentorship.votes.core.shared.event.StaveRegistered;
 import edu.mentorship.votes.core.stave.StaveRepresentation;

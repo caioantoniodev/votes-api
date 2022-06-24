@@ -1,4 +1,4 @@
-package edu.mentorship.votes.structure.mapper;
+package edu.mentorship.votes.infra.mapper;
 
 import lombok.Getter;
 

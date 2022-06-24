@@ -1,4 +1,4 @@
-package edu.mentorship.votes.structure.config.bean;
+package edu.mentorship.votes.infra.config.bean;
 
 import edu.mentorship.votes.application.dto.InputNewStaveDto;
 import edu.mentorship.votes.core.stave.domain.Stave;
