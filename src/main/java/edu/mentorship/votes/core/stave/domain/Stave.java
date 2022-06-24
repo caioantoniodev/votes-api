@@ -1,6 +1,6 @@
 package edu.mentorship.votes.core.stave.domain;
 
-import lombok.Builder;
+import edu.mentorship.votes.core.shared.StaveIdentify;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,11 +11,6 @@ import java.time.ZoneId;
 @Data
 @Document(collection = "stave")
 public class Stave {
-
-    public Stave() {
-        createAt = LocalDateTime.now(ZoneId.of("UTC"));
-        updateAt = LocalDateTime.now(ZoneId.of("UTC"));
-    }
 
     @Id
     private String id;
@@ -39,4 +34,12 @@ public class Stave {
     private int totalVotesNo;
 
     private int totalVoteInvalid;
+
+    private StaveIdentify identify;
+
+    public Stave() {
+        createAt = LocalDateTime.now(ZoneId.of("UTC"));
+        updateAt = LocalDateTime.now(ZoneId.of("UTC"));
+        identify = new StaveIdentify();
+    }
 }

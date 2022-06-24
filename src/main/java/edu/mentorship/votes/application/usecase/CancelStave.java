@@ -2,9 +2,7 @@ package edu.mentorship.votes.application.usecase;
 
 import edu.mentorship.votes.core.shared.command.ServiceCommand;
 import edu.mentorship.votes.core.stave.domain.Stave;
-import edu.mentorship.votes.core.stave.service.DeletedServiceCommand;
 import edu.mentorship.votes.structure.repository.StaveRepository;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
