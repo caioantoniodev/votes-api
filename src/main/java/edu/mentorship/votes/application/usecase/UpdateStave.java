@@ -2,7 +2,7 @@ package edu.mentorship.votes.application.usecase;
 
 import edu.mentorship.votes.application.dto.InputUpdateStaveDto;
 import edu.mentorship.votes.application.dto.StaveDto;
-import edu.mentorship.votes.structure.repository.StaveRepository;
+import edu.mentorship.votes.infra.repository.StaveRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

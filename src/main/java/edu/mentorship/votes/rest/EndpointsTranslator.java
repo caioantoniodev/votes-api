@@ -1,4 +1,4 @@
-package edu.mentorship.votes.application.rest;
+package edu.mentorship.votes.rest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;

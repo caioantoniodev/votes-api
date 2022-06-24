@@ -1,4 +1,4 @@
-package edu.mentorship.votes.structure.config.bean;
+package edu.mentorship.votes.infra.config.bean;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

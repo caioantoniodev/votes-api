@@ -1,4 +1,4 @@
-package edu.mentorship.votes.structure.config.properties;
+package edu.mentorship.votes.infra.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

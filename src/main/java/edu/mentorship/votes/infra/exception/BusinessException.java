@@ -1,4 +1,4 @@
-package edu.mentorship.votes.structure.exception;
+package edu.mentorship.votes.infra.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

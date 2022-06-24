@@ -1,4 +1,4 @@
-package edu.mentorship.votes.application.rest;
+package edu.mentorship.votes.rest;
 
 import edu.mentorship.votes.application.api.StaveApi;
 import edu.mentorship.votes.application.dto.InputNewStaveDto;

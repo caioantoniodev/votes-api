@@ -3,8 +3,8 @@ package edu.mentorship.votes.application.handler;
 import edu.mentorship.votes.application.dto.ErrorBaseDto;
 import edu.mentorship.votes.application.dto.ErrorDetailsDto;
 import edu.mentorship.votes.application.dto.ErrorDto;
-import edu.mentorship.votes.application.rest.EndpointsTranslator;
-import edu.mentorship.votes.structure.exception.BusinessException;
+import edu.mentorship.votes.rest.EndpointsTranslator;
+import edu.mentorship.votes.infra.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
@@ -20,7 +20,7 @@ import javax.validation.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static edu.mentorship.votes.structure.mapper.MessageMapper.ARGUMENT_INVALID;
+import static edu.mentorship.votes.infra.mapper.MessageMapper.ARGUMENT_INVALID;
 import static org.springframework.http.HttpHeaders.ACCEPT_LANGUAGE;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
