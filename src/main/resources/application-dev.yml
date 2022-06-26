@@ -7,6 +7,10 @@ votes-api:
       username: votes
       password: votes
       authentication-database: admin
+    thread:
+      core: 2
+      poolSize: 2
+      queueCapacity: 100
     kafka:
       producer:
         bootstrapServerHost: localhost:9092

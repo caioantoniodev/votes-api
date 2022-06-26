@@ -7,7 +7,10 @@ votes-api:
       username: ~
       password: ~
       authentication-database: ~
-
+    thread:
+      core: 0
+      poolSize: 0
+      queueCapacity: 0
     kafka:
       producer:
         bootstrapServerHost: ~
@@ -50,3 +53,9 @@ spring:
     default-property-inclusion: non_null
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+  task:
+    execution:
+      pool:
+        core-size: ${votes-api.configurations.thread.core}
+        max-size: ${votes-api.configurations.thread.poolSize}
+        queue-capacity: ${votes-api.configurations.thread.queueCapacity}
