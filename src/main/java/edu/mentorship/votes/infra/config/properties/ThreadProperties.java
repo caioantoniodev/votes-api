@@ -4,19 +4,19 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
-@ConfigurationProperties(prefix="votes-api.configurations.thread")
+@ConfigurationProperties(prefix = "votes-api.configurations.thread")
 @Validated
 @Data
 public class ThreadProperties {
 
-    @NotBlank
+    @Positive
     private Integer core;
 
-    @NotBlank
+    @Positive
     private Integer poolSize;
 
-    @NotBlank
+    @Positive
     private Integer queueCapacity;
 }
