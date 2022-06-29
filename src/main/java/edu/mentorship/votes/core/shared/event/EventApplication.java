@@ -4,6 +4,14 @@ import java.time.LocalDateTime;
 
 public abstract class EventApplication<M> {
 
-    public abstract M getMessage();
-    public abstract LocalDateTime getTimeStamp();
+    private final LocalDateTime localDateTime;
+
+    protected EventApplication() {
+        localDateTime = LocalDateTime.now();
+    }
+
+    public abstract M getSessionRepresentation();
+    public LocalDateTime getTimeStamp() {
+        return localDateTime;
+    }
 }

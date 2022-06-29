@@ -2,25 +2,17 @@ package edu.mentorship.votes.core.shared.event;
 
 import edu.mentorship.votes.core.stave.StaveRepresentation;
 
-import java.time.LocalDateTime;
-
 public class StaveRegistered extends EventApplication<StaveRepresentation> {
 
-    private final StaveRepresentation message;
-    private final LocalDateTime timeStamp;
+    private final StaveRepresentation staveRepresentation;
 
-    public StaveRegistered(StaveRepresentation message) {
-        this.message = message;
-        this.timeStamp = LocalDateTime.now();
+    public StaveRegistered(StaveRepresentation staveRepresentation) {
+        this.staveRepresentation = staveRepresentation;
     }
 
-    @Override
-    public StaveRepresentation getMessage() {
-        return message;
-    }
 
     @Override
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
+    public StaveRepresentation getSessionRepresentation() {
+        return staveRepresentation;
     }
 }

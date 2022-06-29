@@ -14,7 +14,7 @@ public class SubStaveRegistered {
     @Async
     @EventListener
     public void handleEvent(StaveRegistered staveRegistered) {
-        StaveRepresentation message = staveRegistered.getMessage();
+        StaveRepresentation message = staveRegistered.getSessionRepresentation();
 
         log.info("subscribe message {} to queue ", message.identify());
     }
