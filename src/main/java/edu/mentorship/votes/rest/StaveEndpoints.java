@@ -2,10 +2,12 @@ package edu.mentorship.votes.rest;
 
 import edu.mentorship.votes.application.api.StaveApi;
 import edu.mentorship.votes.application.dto.InputNewStaveDto;
+import edu.mentorship.votes.application.dto.InputStartSessionDto;
 import edu.mentorship.votes.application.dto.InputUpdateStaveDto;
 import edu.mentorship.votes.application.dto.StaveDto;
 import edu.mentorship.votes.application.usecase.CancelStave;
 import edu.mentorship.votes.application.usecase.CreateStave;
+import edu.mentorship.votes.application.usecase.StartSession;
 import edu.mentorship.votes.application.usecase.UpdateStave;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ public class StaveEndpoints implements StaveApi {
     private final CreateStave createStave;
     private final UpdateStave updateStave;
     private final CancelStave cancelStave;
+
+    private final StartSession startSession;
 
     @Override
     @PostMapping
@@ -42,6 +46,13 @@ public class StaveEndpoints implements StaveApi {
         var payload = updateStave.update(id, inputUpdateStaveDto);
 
         return ResponseEntity.status(OK).body(payload);
+    }
+
+    @Override
+    public ResponseEntity<Void> startSession(String id, InputStartSessionDto inputStartSessionDto) {
+       startSession.startSession(id, inputStartSessionDto);
+
+        return ResponseEntity.noContent().build();
     }
 
     @Override

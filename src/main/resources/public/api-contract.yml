@@ -259,9 +259,8 @@ paths:
           name: id
           description: identificar único Pauta para iniciar a sessão.
           schema:
-            type: integer
-            format: int64
-            example: 1
+            type: string
+            example: 14312432432
       requestBody:
         content:
           application/json:
