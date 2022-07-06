@@ -42,4 +42,8 @@ public class Stave {
         updateAt = LocalDateTime.now(ZoneId.of("UTC"));
         identify = new StaveIdentify();
     }
+
+    public Boolean verifyState() {
+        return state.equals(StateStave.CREATE.name());
+    }
 }

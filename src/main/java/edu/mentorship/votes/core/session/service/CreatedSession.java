@@ -6,12 +6,11 @@ import edu.mentorship.votes.infra.repository.SessionRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CreateSession {
+public class CreatedSession {
 
     private final SessionRepository sessionRepository;
 
-
-    public void createSession(StaveRepresentation message) {
+    public void createdSession(StaveRepresentation message) {
         var session = new Session();
 
         session.setIdentify(message.identify());

@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class StaveRegisteredListener {
 
-    private final CreateSession createSession;
+    private final CreatedSession createSession;
 
     @Async
     @EventListener
     public void handleEvent(StaveRegistered staveRegistered) {
         StaveRepresentation message = staveRegistered.getSessionRepresentation();
 
-        createSession.createSession(message);
+        createSession.createdSession(message);
 
         log.info(message.identify());
     }
