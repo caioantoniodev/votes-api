@@ -4,8 +4,10 @@ import edu.mentorship.votes.core.session.entity.Session;
 import edu.mentorship.votes.core.stave.StaveRepresentation;
 import edu.mentorship.votes.infra.repository.SessionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
+@Service
 public class CreatedSession {
 
     private final SessionRepository sessionRepository;
