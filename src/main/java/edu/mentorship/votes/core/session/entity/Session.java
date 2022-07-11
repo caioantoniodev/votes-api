@@ -9,7 +9,7 @@ import java.time.ZoneId;
 
 
 @Data
-@Document
+@Document(collection = "session")
 public class Session {
 
     @Id
