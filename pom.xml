@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.6</version>
+        <version>2.5.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>edu.mentorship.votes</groupId>
@@ -42,6 +42,8 @@
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <jackson-databind-nullable.version>0.2.2</jackson-databind-nullable.version>
         <springfox-bean-validators.version>2.10.5</springfox-bean-validators.version>
+        <spring-cloud.version>2020.0.4</spring-cloud.version>
+        <rqueue-spring-boot-starter.version>2.10.1-RELEASE</rqueue-spring-boot-starter.version>
     </properties>
     <build>
         <plugins>            <!--      configure spring-boot-maven-plugin      -->
@@ -205,6 +207,19 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+
        <!-- Documentation Dependencies -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -317,13 +332,16 @@
             <artifactId>modelmapper</artifactId>
             <version>3.1.0</version>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>com.github.sonus21</groupId>
+            <artifactId>rqueue-spring-boot-starter</artifactId>
+            <version>${rqueue-spring-boot-starter.version}</version>
         </dependency>
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
+            <groupId>com.github.sonus21</groupId>
+            <artifactId>rqueue-spring</artifactId>
+            <version>${rqueue-spring-boot-starter.version}</version>
         </dependency>
     </dependencies>
 </project>

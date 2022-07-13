@@ -7,5 +7,7 @@ import lombok.NoArgsConstructor;
 public final class CommandNameConstants {
 
     public static final String CREATED_COMMAND = "CREATED_COMMAND";
+
+    public static final String SESSION_COMMAND = "SESSION_COMMAND";
     public static final String DELETED_COMMAND = "DELETED_COMMAND";
 }

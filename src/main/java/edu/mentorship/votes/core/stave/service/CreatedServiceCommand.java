@@ -15,7 +15,7 @@ public class CreatedServiceCommand implements ServiceCommand<Stave, StaveReprese
 
     @Override
     public StaveRepresentation execute(Stave input) {
-        StaveRepresentation representationAdapter = StaveEventRepresentationAdapter.of(input.getIdentify().getValue(),
+        StaveRepresentation representationAdapter = StaveEventRepresentationAdapter.of(input.getIdentify(),
                 input.getTheme(), input.getDescription());
 
         StaveRegistered staveRegistered = new StaveRegistered(representationAdapter);
@@ -24,7 +24,4 @@ public class CreatedServiceCommand implements ServiceCommand<Stave, StaveReprese
 
         return representationAdapter;
     }
-
-    // To Do
-    /* Create session */
 }

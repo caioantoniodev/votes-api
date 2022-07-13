@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.UUID;
 
 @Data
 @Document(collection = "stave")
@@ -35,12 +36,12 @@ public class Stave {
 
     private int totalVoteInvalid;
 
-    private StaveIdentify identify;
+    private String identify;
 
     public Stave() {
         createAt = LocalDateTime.now(ZoneId.of("UTC"));
         updateAt = LocalDateTime.now(ZoneId.of("UTC"));
-        identify = new StaveIdentify();
+        identify = UUID.nameUUIDFromBytes(LocalDateTime.now().toString().getBytes()).toString();
     }
 
     public Boolean verifyState() {
