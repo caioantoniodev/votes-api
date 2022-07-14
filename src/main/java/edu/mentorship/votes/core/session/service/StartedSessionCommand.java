@@ -16,7 +16,7 @@ public class StartedSessionCommand implements ServiceCommand<Session, SessionRep
     @Override
     public SessionEventRepresentationAdapter execute(Session input) {
         SessionEventRepresentationAdapter representationAdapter = SessionEventRepresentationAdapter.of(input.getIdentify(),
-                input.getTimeToLive(), input.getSessionState().name(), input.getCreatedAt(), input.getCreatedAt());
+                input.getTimeToLive(), input.getSessionState().name(), input.getCreatedAt(), input.getFinishedAt());
 
         SessionStarted sessionStarted = new SessionStarted(representationAdapter);
 

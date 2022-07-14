@@ -1,14 +1,10 @@
 package edu.mentorship.votes.application.usecase;
 
 import edu.mentorship.votes.application.dto.InputStartSessionDto;
-import edu.mentorship.votes.core.stave.domain.Stave;
 import edu.mentorship.votes.core.stave.service.ChangeSessionState;
-import edu.mentorship.votes.infra.repository.SessionRepository;
 import edu.mentorship.votes.infra.repository.StaveRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +22,6 @@ public class StartSession {
             throw new RuntimeException();
         }
 
-        changeSessionState.changeSessionInProgressState(id);
+        changeSessionState.changeSessionInProgressState(stave.getIdentify());
     }
 }

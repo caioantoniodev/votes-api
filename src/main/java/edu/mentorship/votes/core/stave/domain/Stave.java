@@ -1,6 +1,5 @@
 package edu.mentorship.votes.core.stave.domain;
 
-import edu.mentorship.votes.core.shared.StaveIdentify;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -2,7 +2,6 @@ package edu.mentorship.votes.core.stave.service;
 
 import edu.mentorship.votes.core.session.entity.Session;
 import edu.mentorship.votes.core.session.entity.SessionState;
-import edu.mentorship.votes.core.stave.domain.StateStave;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -31,7 +30,7 @@ public class ChangeSessionState {
     public void changeSessionInProgressState(String identify) {
         var query = Query.query(Criteria.where("identify").is(identify));
 
-        var updateDefinition = Update.update("sessionState", SessionState.IN_PROGRESS.name());
+        var updateDefinition = Update.update("session_state", SessionState.IN_PROGRESS.name());
 
         mongoTemplate.findAndModify(query, updateDefinition, Session.class);
     }
