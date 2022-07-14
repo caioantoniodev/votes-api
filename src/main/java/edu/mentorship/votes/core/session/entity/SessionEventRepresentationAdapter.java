@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 public class SessionEventRepresentationAdapter implements SessionRepresentation {
 
     private final String identify;
-
     private final Long timeToLive;
     private final String state;
     private final LocalDateTime createdAt;

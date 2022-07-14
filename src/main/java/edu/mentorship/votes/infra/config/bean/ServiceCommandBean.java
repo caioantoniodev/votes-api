@@ -2,14 +2,12 @@ package edu.mentorship.votes.infra.config.bean;
 
 import edu.mentorship.votes.core.session.SessionRepresentation;
 import edu.mentorship.votes.core.session.entity.Session;
-import edu.mentorship.votes.core.session.service.EndSessionListener;
 import edu.mentorship.votes.core.session.service.StartedSessionCommand;
 import edu.mentorship.votes.core.shared.command.ServiceCommand;
 import edu.mentorship.votes.core.stave.StaveRepresentation;
 import edu.mentorship.votes.core.stave.domain.Stave;
 import edu.mentorship.votes.core.stave.service.CreatedServiceCommand;
 import edu.mentorship.votes.core.stave.service.DeletedServiceCommand;
-import edu.mentorship.votes.infra.repository.SessionRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
