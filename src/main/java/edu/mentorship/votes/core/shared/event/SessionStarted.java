@@ -1,8 +1,12 @@
 package edu.mentorship.votes.core.shared.event;
 
 import edu.mentorship.votes.core.session.SessionRepresentation;
+import edu.mentorship.votes.core.session.entity.SessionEventRepresentationAdapter;
+import edu.mentorship.votes.core.stave.StaveRepresentation;
 
-public class SessionStarted extends EventApplication<SessionRepresentation> {
+import java.time.LocalDateTime;
+
+public class SessionStarted implements SessionRepresentation {
 
     private final SessionRepresentation sessionRepresentation;
 
@@ -11,7 +15,22 @@ public class SessionStarted extends EventApplication<SessionRepresentation> {
     }
 
     @Override
-    public SessionRepresentation getSessionRepresentation() {
-        return sessionRepresentation;
+    public String identify() {
+        return null;
+    }
+
+    @Override
+    public String state() {
+        return null;
+    }
+
+    @Override
+    public LocalDateTime createdAt() {
+        return null;
+    }
+
+    @Override
+    public LocalDateTime finishedAt() {
+        return null;
     }
 }

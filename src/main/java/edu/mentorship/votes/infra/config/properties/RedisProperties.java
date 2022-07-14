@@ -12,6 +12,5 @@ import javax.validation.constraints.NotBlank;
 public class RedisProperties {
     @NotBlank(message="host is required.")
     private String host;
-    @NotBlank(message="port is required.")
-    private String port;
+    private Integer port;
 }

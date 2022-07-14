@@ -49,6 +49,7 @@ public class StaveEndpoints implements StaveApi {
     }
 
     @Override
+    @PatchMapping("/{id}")
     public ResponseEntity<Void> startSession(String id, InputStartSessionDto inputStartSessionDto) {
        startSession.startSession(id, inputStartSessionDto);
 

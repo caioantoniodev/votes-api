@@ -9,13 +9,16 @@ import java.time.ZoneId;
 
 
 @Data
-@Document
+@Document(collection = "session")
 public class Session {
 
     @Id
     private String identify;
     private SessionState sessionState;
+
+    private Long timeToLive;
     private LocalDateTime createdAt;
+
     private LocalDateTime finishedAt;
 
     public Session() {

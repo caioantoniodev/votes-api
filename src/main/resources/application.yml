@@ -17,7 +17,7 @@ votes-api:
         topic: ~
     redis:
       host: ~
-      port: ~
+      port: 0
 
 application:
   version: @project.version@
