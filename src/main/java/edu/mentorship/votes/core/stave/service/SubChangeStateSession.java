@@ -1,29 +1,31 @@
-package edu.mentorship.votes.core.session.service;
+package edu.mentorship.votes.core.stave.service;
 
 import edu.mentorship.votes.core.session.entity.SessionEventRepresentationAdapter;
-import edu.mentorship.votes.core.shared.ScheduleExecutor;
 import edu.mentorship.votes.core.shared.event.SessionStarted;
+import edu.mentorship.votes.core.stave.domain.Stave;
+import edu.mentorship.votes.infra.repository.StaveRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @Slf4j
 @RequiredArgsConstructor
-public class SubSessionStarted {
+public class SubChangeStateSession {
 
-    @Autowired
-    private final ScheduleExecutor scheduleExecutor;
+    private final ChangeState changeState;
+    private final StaveRepository staveRepository;
 
     @Async
     @EventListener
-    public void subSessionStarted(SessionStarted message) {
+    public void subChangeStateSession(SessionStarted message) {
         SessionEventRepresentationAdapter sessionRepresentation = message.getSessionRepresentation();
 
-        scheduleExecutor.includeSession(sessionRepresentation.identify(), sessionRepresentation.timeToLive());
+        Stave stave = staveRepository.findById(sessionRepresentation.identify()).orElseThrow();
+
+        changeState.processNextState(stave);
 
         log.info("retrieve message {} to queue ", message.getTimeStamp());
     }
