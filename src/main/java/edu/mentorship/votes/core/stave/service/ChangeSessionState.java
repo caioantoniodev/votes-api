@@ -19,19 +19,19 @@ public class ChangeSessionState {
     private final MongoTemplate mongoTemplate;
 
     public void changeSessionFinishState(String identify) {
-        var query = Query.query(Criteria.where("identify").is(identify));
+        var query = Query.query(Criteria.where("id").is(identify));
 
-        var updateDefinition = Update.update("sessionState", SessionState.FINISH.name())
+        var updateDefinition = Update.update("session_state", SessionState.FINISH.name())
                 .set("finishedAt", LocalDateTime.now(ZoneId.of("UTC")));
 
         mongoTemplate.findAndModify(query, updateDefinition, Session.class);
     }
 
-    public void changeSessionInProgressState(String identify) {
-        var query = Query.query(Criteria.where("identify").is(identify));
+    public Session changeSessionInProgressState(String identify) {
+        var query = Query.query(Criteria.where("id").is(identify));
 
         var updateDefinition = Update.update("session_state", SessionState.IN_PROGRESS.name());
 
-        mongoTemplate.findAndModify(query, updateDefinition, Session.class);
+       return mongoTemplate.findAndModify(query, updateDefinition, Session.class);
     }
 }
