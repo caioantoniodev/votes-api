@@ -1,8 +1,5 @@
 ## VOTES-API
 
-Aplicação para prova de conceito, um exemplo de solução para uma aplicação de votação com alta
-demanda.
-
 As premissas:
 
 A solução deve ser executada na nuvem e promover as seguintes funcionalidades através de uma API REST:
